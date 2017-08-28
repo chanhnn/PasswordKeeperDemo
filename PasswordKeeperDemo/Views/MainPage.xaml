@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:helpers="clr-namespace:PasswordKeeperDemo.Helpers;assembly=PasswordKeeperDemo"
+            x:Class="PasswordKeeperDemo.Views.MainPage"
+            Title="{Binding Title}"
+            x:Name="Root"
+            IsBusy="{Binding IsBusy}">
+    <!--Pages can be added as references or inline-->
+    <ContentPage Title="{Binding ListTitle}" Icon="mpList.png">
+        <ContentPage.ToolbarItems>
+            <ToolbarItem Icon="mpPlus.png" Command="{Binding AddCommand}" />
+        </ContentPage.ToolbarItems>
+        <ContentPage.Content>
+            <Grid>
+                <ListView ItemsSource="{Binding PasswordNotes}" 
+                      Margin="5" 
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
+                      RowHeight="60">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Padding="0,0,0,0"  HorizontalOptions="FillAndExpand" OutlineColor="Black" HasShadow="True">
+                                    <StackLayout Orientation="Horizontal" BackgroundColor="{Binding IsFavourite, Converter={helpers:IsFavouriteToColorConverter}}">
+                                        <Image Source="{Binding Icon}" HorizontalOptions="Start" Margin="5,0,0,0" />
+                                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                            <Label Text="{Binding Title}" Margin="5,0,0,0" VerticalTextAlignment="Center" VerticalOptions="Center" TextColor="Black" FontSize="16" FontAttributes="Bold" />
+                                            <Label Text="{Binding Note}" Margin="5,0,0,0" VerticalTextAlignment="Center" VerticalOptions="Center" TextColor="CornflowerBlue" FontSize="14" FontAttributes="Italic"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ActivityIndicator VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   IsRunning="{Binding IsBusy}"
+                                   IsVisible="{Binding IsBusy}" />
+            </Grid>
+        </ContentPage.Content>
+    </ContentPage>
+    <ContentPage Title="{Binding FavouriteTitle}" Icon="mpFavourites.png">
+        <ContentPage.Content>
+            <Grid>
+                <ListView ItemsSource="{Binding PasswordNoteFavourites}" 
+                      Margin="5" 
+                      SelectedItem="{Binding SelectedFavouriteNoteItem, Mode=TwoWay}" 
+                      RowHeight="60">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Padding="0,0,0,0"  HorizontalOptions="FillAndExpand" OutlineColor="Black" HasShadow="True">
+                                    <StackLayout Orientation="Horizontal" BackgroundColor="#EAFAEA">
+                                        <Image Source="{Binding Icon}" HorizontalOptions="Start" Margin="5,0,0,0" />
+                                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                            <Label Text="{Binding Title}" Margin="5,0,0,0" VerticalTextAlignment="Center" VerticalOptions="Center" TextColor="Black" FontSize="16" FontAttributes="Bold" />
+                                            <Label Text="{Binding Note}" Margin="5,0,0,0" VerticalTextAlignment="Center" VerticalOptions="Center" TextColor="CornflowerBlue" FontSize="14" FontAttributes="Italic"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ActivityIndicator VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   HeightRequest="30"
+                                   WidthRequest="30"
+                                   IsRunning="{Binding IsBusy}"
+                                   IsVisible="{Binding IsBusy}" />
+
+            </Grid>
+        </ContentPage.Content>
+    </ContentPage>
+    <ContentPage Title="{Binding SettingTitle}" Icon="mpSettings.png">
+        <ContentPage.Content>
+            <Grid>
+                <TableView HasUnevenRows="True">
+                    <TableRoot>
+                        <TableSection Title="Security">
+                            <ViewCell Height="30">
+                                <StackLayout Orientation="Horizontal" Padding="15,0,15,0">
+                                    <Label Text="Require Password" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
+                                    <Switch IsToggled="{Binding IsRequirePassword}" 
+                                        HorizontalOptions="End" 
+                                        VerticalOptions="Center">
+                                    </Switch>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell Height="30">
+                                <StackLayout Orientation="Horizontal" Padding="15,0,15,0">
+                                    <!--<Label Text="Change password" HorizontalOptions="StartAndExpand" VerticalOptions="Center" IsEnabled="{Binding HasRequirePassword}">-->
+                                    <Label Text="Change password" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ChangePasswordCommand}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                        <TableSection Title="Backup &amp; Restore">
+                            <ViewCell Height="70">
+                                <StackLayout Orientation="Horizontal" Padding="15,0,15,0">
+                                    <Image Source="mpDropbox.png" HorizontalOptions="Start">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding DropboxCommand}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                        <Label Text="Backup &amp; Restore with Dropbox" FontAttributes="Bold" TextColor="Brown">
+                                        </Label>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Display Name: " HorizontalOptions="Start" FontAttributes="Italic" FontSize="11" />
+                                            <Label Text="{Binding DropboxDisplayName}" HorizontalOptions="FillAndExpand" FontAttributes="Italic" FontSize="11"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Email: " HorizontalOptions="Start" FontAttributes="Italic" FontSize="11" />
+                                            <Label Text="{Binding DropboxEmail}" HorizontalOptions="FillAndExpand" FontAttributes="Italic" FontSize="11"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell Height="30">
+                                <StackLayout Orientation="Horizontal" Padding="15,0,15,0">
+                                    <Image Source="mpBackup.png" HorizontalOptions="Start"></Image>
+                                    <Label Text="Backup" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BackupCommand}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </ViewCell>
+                            <ViewCell Height="30">
+                                <StackLayout Orientation="Horizontal" Padding="15,0,15,0">
+                                    <Image Source="mpRestore.png" HorizontalOptions="Start"></Image>
+                                    <Label Text="Restore" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding RestoreCommand}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
+                <ActivityIndicator VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               HeightRequest="30"
+                               WidthRequest="30"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}" />
+
+            </Grid>
+        </ContentPage.Content>
+    </ContentPage>
+</TabbedPage>

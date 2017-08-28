@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordKeeperDemo.Views.CategoryPage"
+             Title="{Binding Title}"
+             x:Name="Root">
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding Cats}"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="15,0,15,0">
+                            <Image Source="{Binding Icon}" HorizontalOptions="Start" WidthRequest="24" />
+                            <Label Text="{Binding CategoryName}" Margin="5,0,5,0" HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Brown" FontAttributes="Bold" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dryIoc:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:dryIoc="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+             x:Class="PasswordKeeperDemo.App">
+    <Application.Resources>
+        <!-- Application resource dictionary -->
+        <ResourceDictionary>
+            <Style Class="StackLayoutTemplate" TargetType="StackLayout">
+                <Setter Property="Margin" Value="10" />
+            </Style>
+            <Style Class="StackLayoutFavTemplate" TargetType="StackLayout">
+                <Setter Property="Margin" Value="0,20,0,0" />
+            </Style>
+            <Style Class="StackLayoutBtnTemplate" TargetType="StackLayout">
+                <Setter Property="Margin" Value="10,20,10,10" />
+            </Style>
+            <Style Class="LabelTemplate" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+            <Style Class="EntryTemplate" TargetType="Entry">
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</dryIoc:PrismApplication>

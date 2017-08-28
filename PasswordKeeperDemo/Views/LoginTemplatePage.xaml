@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordKeeperDemo.Views.LoginTemplatePage"
+             Title="{Binding Title}"
+             x:Name="Root">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout BindingContext="{Binding PasswordNote}" StyleClass="StackLayoutTemplate">
+                <Image Source="{Binding Icon}" HorizontalOptions="Center" VerticalOptions="Center" />
+                <Label Text="Title" StyleClass="LabelTemplate" />
+                <Entry Text="{Binding Title}" Placeholder="Title" StyleClass="EntryTemplate" />
+                <Label Text="User Name" StyleClass="LabelTemplate" />
+                <Entry Text="{Binding UserName}" Placeholder="User name or Email" StyleClass="EntryTemplate"/>
+                <Label Text="Password" StyleClass="LabelTemplate" />
+                <StackLayout Orientation="Horizontal">
+                    <Entry Text="{Binding Password}" Placeholder="Password" IsPassword="True" StyleClass="EntryTemplate" HorizontalOptions="FillAndExpand" />
+                    <Image Source="catEye.png" HorizontalOptions="End">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference Root}, Path=BindingContext.ViewPasswordCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+                <Label Text="Website" StyleClass="LabelTemplate"/>
+                <Entry Text="{Binding Website}" Placeholder="Website" StyleClass="EntryTemplate" />
+                <Label Text="Notes" StyleClass="LabelTemplate"/>
+                <Entry Text="{Binding Note}" Placeholder="Notes" StyleClass="EntryTemplate" />
+                <StackLayout Orientation="Horizontal" StyleClass="StackLayoutFavTemplate">
+                    <Label Text="Favourite" StyleClass="LabelTemplate" HorizontalOptions="FillAndExpand" />
+                    <Switch IsToggled="{Binding IsFavourite}" HorizontalOptions="End" />
+                </StackLayout>
+            </StackLayout>
+            <StackLayout StyleClass="StackLayoutBtnTemplate">
+                <Button Text="Save" Command="{Binding SaveCommand}" />
+                <Button Text="Delete" Command="{Binding DeleteCommand} "/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
